@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Arduino</title>
+
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  
+  <script>
+    'use strict';
+
+    var socket = io();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var $inputRangeHolder = $('.input-range__holder');
+
+      $inputRangeHolder.on(
+        'input',
+        {
+          $inputValue: $inputRangeHolder.find('.input-value'),
+          $inputRange: $inputRangeHolder.find('.input--type_range')
+        },
+        function(e) {
+          var ch = parseInt($(this).data('ch'));
+          var value = parseInt(e.data.$inputRange.val());
+          e.data.$inputValue.text(value);
+
+          socket.emit('signal', {
+            ch: ch,
+            tempel: value
+          });
+        }
+      );
+
+    }, false);
+  </script>
+
+
+  <style>
+    .clearfix:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .input-range__holder {
+      display: table;
+      font-size: 14px;
+    }
+
+    .input-range__holder .input-label,
+    .input-range__holder .input-ui {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 6px 14px;
+    }
+
+    .input-range__holder .input-label {
+      border: 1px solid #ddd;
+      width: 5.5em;
+    }
+
+    .input-range__holder .input-ui {
+      border: 1px solid #ccc;
+      border-left: none;
+      background-color: #f8f8f8;
+    }
+
+    .input--type_range {
+      width: 300px;
+      margin: 0;
+    }
+  </style>
+
+</head>
+<body>
+  
+  <form>
+    <div id="js-input--type_range0" class="input-range__holder" data-ch="1">
+      <div class="input-label">
+        <span class="input-ch">1ch : </span>
+        <span class="input-value">0</span>
+      </div>
+
+      <div class="input-ui">
+        <input
+          class="input--type_range" 
+          type="range" 
+          name="ch1" 
+          value="0" 
+          min="0" 
+          max="4095" 
+          step="1"
+        >
+      </div>
+    </div>
+  </form>
+
+</body>
+</html>
