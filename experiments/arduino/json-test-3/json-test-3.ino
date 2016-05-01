@@ -11,10 +11,11 @@ void setup() {
     ;
   }
 
-  StaticJsonBuffer<200> jsonBuffer;
-
-  char json[] = "{\"memorys\": [[[{\"tempel\": 36.5}, {\"tempel\": 37.5}]]]}";
+  // StaticJsonBuffer<200> jsonBuffer;
+  DynamicJsonBuffer jsonBuffer;
   
+  char json[] = "{\"memorys\": [[[{\"tempel\": 36.5}, {\"tempel\": 37.5}]]]}";
+
   JsonObject& root = jsonBuffer.parseObject(json);
   JsonArray& memorys = root["memorys"];
 
