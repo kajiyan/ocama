@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "johnny-five": "^0.9.44"
+    "express": "^4.13.4",
+    "johnny-five": "^0.9.44",
+    "serialport": "^2.1.2",
+    "socket.io": "^1.4.5"
   }
 }
