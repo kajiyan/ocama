@@ -1,47 +1,30 @@
-String inputString = "";
-boolean stringComplete = false;
+#include "Tlc5940.h"
 
 
 void setup() {
+  Tlc.init();
+  
   Serial.begin(9600);
   while (!Serial) {
     ;
   }
-
-  inputString.reserve(200);
-//  establishContact();
 }
 
 void loop() {
-  Serial.println("TEST");
-
-//  serialEvent(); //call the function
-//  // print the string when a newline arrives:
-//  if (stringComplete) {
-//    stringComplete = false;
-//    Serial.println(inputString);
-//    // clear the string:
-//    inputString = "";
-//  }
-
+  Tlc.clear();
+  Tlc.set(0, 100);
+  Tlc.update();
+  
   if (Serial.available()) {
     char str[255];
     recvStr(str);
+
+    
+    
     Serial.println(str);
     Serial.flush();
     delay(1000);
   }
-  
-  
-//  char str[255];
-//  
-//  if (Serial.available()) {
-//    recvStr(str);
-//    Serial.println(str);
-//  }
-//  Serial.flush();
-//  
-//  delay(1000);
 }
 
 /**
@@ -53,23 +36,6 @@ void establishContact() {
     delay(300);
   }
 }
-
-
-
-/**
- * serialEvent
- */
-void serialEvent() {
-  while (Serial.available()) {
-    char inChar = (char)Serial.read();
-    inputString += inChar;
-    if (inChar == '\n') {
-      stringComplete = true;
-      Serial.flush();
-    }
-  }
-}
-
 
 
 void recvStr(char *buf) {
