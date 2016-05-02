@@ -103,7 +103,7 @@ server.listen(3000, function() {
 var serialPort = new serialport.SerialPort(
   '/dev/cu.usbmodem1411',
   {
-    baudrate: 9600,
+    baudrate: 57600,
     parser: serialport.parsers.readline('\n')
   }
 );

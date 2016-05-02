@@ -6,7 +6,7 @@ const int TLC_CH = 16;
 void setup() {
   Tlc.init();
   
-  Serial.begin(9600);
+  Serial.begin(57600);
   while (!Serial) {
     ;
   }
@@ -45,7 +45,7 @@ void loop() {
           ch += 1;
   
 //          Serial.println(ch);
-          Serial.println(atoi(memory["tempel"].as<const char*>()));
+//          Serial.println(atoi(memory["tempel"].as<const char*>()));
 
           Tlc.set(ch, atoi(memory["tempel"].as<const char*>()));
           Tlc.update();
