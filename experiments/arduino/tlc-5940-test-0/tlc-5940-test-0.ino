@@ -10,10 +10,16 @@ void setup() {
   while (!Serial) {
     ;
   }
+
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
 }
 
 void loop() {
   Tlc.clear();
+
+  digitalWrite(4, HIGH);
+  digitalWrite(5, LOW);
   
   if (Serial.available()) {
     char str[255];
