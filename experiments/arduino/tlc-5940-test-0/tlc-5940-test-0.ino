@@ -20,7 +20,7 @@ void loop() {
 
   digitalWrite(4, HIGH);
   digitalWrite(5, LOW);
-  
+
   if (Serial.available()) {
     char str[255];
     recvStr(str);
@@ -32,7 +32,7 @@ void loop() {
     int ch = 0;
     int i = 0;
     int j = 0;
-  
+ 
     for(JsonArray::iterator _sensors=memorys.begin(); _sensors!=memorys.end(); ++_sensors) {
       JsonArray& sensors = *_sensors;
   
@@ -48,21 +48,22 @@ void loop() {
         for(JsonArray::iterator _memory=memory.begin(); _memory!=memory.end(); ++_memory) {
           JsonObject& memory = *_memory;
   
-          ch += 1;
-  
-//          Serial.println(ch);
-//          Serial.println(atoi(memory["tempel"].as<const char*>()));
+          Serial.println(ch);
+          Serial.println(atoi(memory["tempel"].as<const char*>()));
 
           Tlc.set(ch, atoi(memory["tempel"].as<const char*>()));
-          Tlc.update();
+          // Tlc.update();
+
+          ch += 1;
         }
       }
     }
 
-//    Serial.println(str);
+    // Serial.println(str);
+    Tlc.update();
     Serial.flush();
     
-//    delay(1000);
+    //delay(1000);
   }
 }
 
